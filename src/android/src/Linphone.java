@@ -48,42 +48,47 @@ public class Linphone extends CordovaPlugin  {
 
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext)
             throws JSONException {
-        if (action.equals("login")) {
-            login(args.getString(0), args.getString(1), args.getString(2), callbackContext);
-            return true;
-        }else if (action.equals("logout")) {
-            logout(callbackContext);
-            return true;
-        }else if (action.equals("call")) {
-            call(args.getString(0), args.getString(1), callbackContext);
-            return true;
-        }else if(action.equals("listenCall")){
-            listenCall(callbackContext);
+        try {
+            if (action.equals("login")) {
+                login(args.getString(0), args.getString(1), args.getString(2), callbackContext);
+                return true;
+            }else if (action.equals("logout")) {
+                logout(callbackContext);
+                return true;
+            }else if (action.equals("call")) {
+                call(args.getString(0), args.getString(1), callbackContext);
+                return true;
+            }else if(action.equals("listenCall")){
+                listenCall(callbackContext);
+                return true;
+            }
+            else if(action.equals("acceptCall")){
+                acceptCall(args.getString(0), callbackContext);
+                return true;
+            }else if (action.equals("videocall")) {
+                videocall(args.getString(0), args.getString(1), callbackContext);
+                return true;
+            }else if(action.equals("hangup")){
+                hangup(callbackContext);
+                return true;
+            }else if(action.equals("toggleVideo")){
+                toggleVideo(callbackContext);
+                return true;
+            }else if(action.equals("toggleSpeaker")){
+                toggleSpeaker(callbackContext);
+                return true;
+            }else if(action.equals("toggleMute")){
+                toggleMute(callbackContext);
+                return true;
+            }else if(action.equals("sendDtmf")){
+                sendDtmf(args.getString(0), callbackContext);
+                return true;
+            }
+            return false;
+        } catch(Exception ex) {
+            callbackContext.error(ex.getMessage());    
             return true;
         }
-        else if(action.equals("acceptCall")){
-            acceptCall(args.getString(0), callbackContext);
-            return true;
-        }else if (action.equals("videocall")) {
-            videocall(args.getString(0), args.getString(1), callbackContext);
-            return true;
-        }else if(action.equals("hangup")){
-            hangup(callbackContext);
-            return true;
-        }else if(action.equals("toggleVideo")){
-            toggleVideo(callbackContext);
-            return true;
-        }else if(action.equals("toggleSpeaker")){
-            toggleSpeaker(callbackContext);
-            return true;
-        }else if(action.equals("toggleMute")){
-            toggleMute(callbackContext);
-            return true;
-        }else if(action.equals("sendDtmf")){
-            sendDtmf(args.getString(0), callbackContext);
-            return true;
-        }
-        return false;
     }
 
     public void login(final String username, final String password, final String domain, final CallbackContext callbackContext) {
