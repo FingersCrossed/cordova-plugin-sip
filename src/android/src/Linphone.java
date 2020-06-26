@@ -145,8 +145,8 @@ public class Linphone extends CordovaPlugin  {
         mLinphoneManager.acceptCall(callbackContext);
     }
 
-    public static synchronized void terminateCall(final Callbackcontext callbackContext){
-        mLinphoneManager.terminateCall();
+    public static synchronized void terminateCall(final CallbackContext callbackContext){
+        mLinphoneManager.terminateCall(callbackContext);
     }
 
     public static synchronized void videocall(final String address, final String displayName, final CallbackContext callbackContext) {
