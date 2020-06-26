@@ -503,6 +503,11 @@ public class LinphoneMiniManager implements LinphoneCoreListener {
 
 			LinphoneCoreFactory lcFactory = LinphoneCoreFactory.instance();
 
+			// Remove all proxy configs before login.  Persistent configs seem to cause android crash if logout hasn't cleaned them up.
+			LinphoneProxyConfig[] prxCfgs = mLinphoneCore.getProxyConfigList();
+			for (LinphoneProxyConfig prxCfg : prxCfgs) {
+				mLinphoneCore.removeProxyConfig(prxCfg);
+			}
 
 			LinphoneAddress address = lcFactory.createLinphoneAddress("sip:" + username + "@" + domain);
 			username = address.getUserName();

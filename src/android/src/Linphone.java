@@ -63,7 +63,10 @@ public class Linphone extends CordovaPlugin  {
                 return true;
             }
             else if(action.equals("acceptCall")){
-                acceptCall(args.getString(0), callbackContext);
+                acceptCall(callbackContext);
+                return true;
+            }else if(action.equals("terminateCall")){
+                terminateCall(callbackContext);
                 return true;
             }else if (action.equals("videocall")) {
                 videocall(args.getString(0), args.getString(1), callbackContext);
@@ -138,11 +141,12 @@ public class Linphone extends CordovaPlugin  {
         mLinphoneManager.listenCall(callbackContext);
     }
 
-    public static synchronized void acceptCall( final String isAcceptCall, final CallbackContext callbackContext){
-        if(isAcceptCall == "true")
-            mLinphoneManager.acceptCall(callbackContext);
-        else
-            mLinphoneManager.terminateCall();
+    public static synchronized void acceptCall(final CallbackContext callbackContext){
+        mLinphoneManager.acceptCall(callbackContext);
+    }
+
+    public static synchronized void terminateCall(final Callbackcontext callbackContext){
+        mLinphoneManager.terminateCall();
     }
 
     public static synchronized void videocall(final String address, final String displayName, final CallbackContext callbackContext) {

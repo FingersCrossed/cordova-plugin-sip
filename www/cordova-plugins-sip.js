@@ -18,13 +18,22 @@ module.exports =
             []
         );
     },
-    accept: function (value, successCallback, errorCallback) {
+    accept: function (successCallback, errorCallback) {
         cordova.exec(
             successCallback,
             errorCallback,
             "Linphone",
             "acceptCall",
-            [value]
+            []
+        );
+    },
+    terminate: function (successCallback, errorCallback) {
+        cordova.exec(
+            successCallback,
+            errorCallback,
+            "Linphone",
+            "terminateCall",
+            []
         );
     },
     listenCall: function (successCallback, errorCallback) {
